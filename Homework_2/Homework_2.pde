@@ -69,12 +69,74 @@ void draw()
   r2 = r1 + 3.14;
   //r3 = r3 + 0.275;
 
-  //xpos+=xstep;
-  //ypos+=ystep;
-  //zpos+=zstep;
-  //masterrotate+=mstep;
+  xpos+=xstep;
+  ypos+=ystep;
+  zpos+=zstep;
+  masterrotate+=mstep;
+}
+void keyPressed()
+{
+  if (keyCode==UP) {
+    ystep=-5;
+  }
+  if (keyCode==DOWN) {
+    ystep=5;
+  }
+  if (keyCode==LEFT) {
+    xstep=-5;
+  }
+  if (keyCode==RIGHT) {
+    xstep=5;
+  }
+  if (key=='='||key=='+')
+  {
+    zstep=5;
+  }
+  if (key=='-')
+  {
+    zstep-=5;
+  }
+  if (key=='r')
+  {
+    xpos = width/2;
+    ypos = height/2;
+    zpos = 0;
+    masterrotate = 0;
+  }
+  if (key=='s')
+  {
+    mstep = 0.1;
+  }
 }
 
+
+void keyReleased()
+{
+  if (keyCode==UP) {
+    ystep=0;
+  }
+  if (keyCode==DOWN) {
+    ystep=0;
+  }
+  if (keyCode==LEFT) {
+    xstep=0;
+  }
+  if (keyCode==RIGHT) {
+    xstep=0;
+  }
+  if (key=='='||key=='+')
+  {
+    zstep=0;
+  }
+  if (key=='-')
+  {
+    zstep=0;
+  }
+  if (key=='s')
+  {
+     mstep=0; 
+  }
+}
 
 //I played around with your "planets" code to make this atom one.
 
