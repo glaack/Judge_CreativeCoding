@@ -34,21 +34,20 @@ void draw()
   rectMode(CENTER);
   image(img, 170, 80);
 
-  //noFill();
   noStroke();
 
   // CAMERA
   translate(xpos, ypos, zpos); // move center to where my mouse is
   rotate(masterrotate, 0, 0, 1);
 
-  fill(0,50,70);
+  fill(0,100,140);
   sphere(30); // draw big sphere
   
   
   // electron1
   pushMatrix(); // go up one level
   rotate(r1, 0, 0, 1);
-  translate(0, 100,0); // offset by 100 points on the x
+  translate(0, 100, 0); // offset by 100 points on the x
   sphere(5); // draw the sphere
   popMatrix(); // go down a level
 
@@ -75,4 +74,7 @@ void draw()
   //zpos+=zstep;
   //masterrotate+=mstep;
 }
+
+
+//I played around with your "planets" code to make this atom one.
 
