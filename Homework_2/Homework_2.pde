@@ -5,6 +5,8 @@ float r3 = 0.;
 
 PImage img;
 
+PFont thefont;
+
 
 float xpos, ypos, zpos;
 float xstep, ystep, zstep;
@@ -13,6 +15,12 @@ float mstep;
 
 void setup()
 {
+  
+  thefont = loadFont("Helvetica-90.vlw"); //loads font
+  textFont(thefont);
+  textAlign(CENTER);
+  textSize(90);
+  
   size(800, 600, OPENGL); // 3-D mode
   sphereDetail(20); // quality of sphere
 
@@ -20,7 +28,7 @@ void setup()
   xpos = width/2;
   zpos = 0;
   
-  img = loadImage("Lithium.png");
+  //img = loadImage("Lithium.png");
 }
 
 void draw()
@@ -32,9 +40,13 @@ void draw()
   stroke(0);
   rect(width/2, height/2, 450, 450);
   rectMode(CENTER);
-  image(img, 170, 80);
+  //image(img, 170, 80);
 
   noStroke();
+  
+  text("3", 580, 160);
+  
+  text("Li", 230, 505);
 
   // CAMERA
   translate(xpos, ypos, zpos); // move center to where my mouse is
