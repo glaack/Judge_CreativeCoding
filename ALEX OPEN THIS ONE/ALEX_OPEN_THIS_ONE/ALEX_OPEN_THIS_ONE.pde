@@ -21,7 +21,7 @@ void setup()
   voiceIndex = round(map(mouseY, 0, height, 0, TextToSpeech.voices.length - 1));
 
   //set the vooice speed based on mouse X
-  voiceSpeed = mouseX;
+  voiceSpeed = 300;
   
 
   // type stuff
@@ -32,11 +32,12 @@ void setup()
   alicelines = loadStrings("aliceinwonderland.txt");
   println(alicelines.length);
 
-  whichline = picknewline();
+  whichline = 0;
+//  whichline = picknewline();
 
   while (alicelines[whichline].length ()<1)
   {
-    whichline = picknewline();
+    whichline = picknextline();
   }
       chary = new float[alicelines[whichline].length ()];
     for (int i = 0; i<chary.length; i++)
@@ -76,7 +77,7 @@ void draw()
     textSize(charsize[i]*thescale);
     text(alicelines[whichline].charAt(i), x, chary[i]);
     x+= textWidth(alicelines[whichline].charAt(i));
-    chary[i]+=random(0, 0);
+    //chary[i]+=random(0, 0);
   }
 
 
@@ -89,7 +90,7 @@ void draw()
 
     while (alicelines[whichline].length ()<1)
     {
-      whichline = picknewline();
+      whichline = picknextline();
     }
 
     chary = new float[alicelines[whichline].length ()];
@@ -102,6 +103,11 @@ void draw()
   }
 }
 
+int picknextline()
+{
+   return((whichline+1)%alicelines.length); 
+}
+
 int picknewline()
 {
   return(int(random(0, alicelines.length)));
@@ -111,14 +117,12 @@ void keyReleased()
 {
 }
 
-void mousePressed()
-{
-    TextToSpeech.say(script, TextToSpeech.voices[voiceIndex], voiceSpeed);
-}
-
 void mouseReleased()
 {
+    TextToSpeech.say(alicelines[whichline], TextToSpeech.voices[voiceIndex], voiceSpeed);
 }
+
+
 
 
 
@@ -171,7 +175,12 @@ static class TextToSpeech extends Object {
   // this sends the "say" command to the terminal with the appropriate args
   static void say(String script, String voice, int speed) {
     try {
-      Runtime.getRuntime().exec(new String[] {"say", "-v", voice, "[[rate " + speed + "]]" + script});
+      Process p = Runtime.getRuntime().exec(new String[] {"say", "-v", voice, "[[rate " + speed + "]]" + script});
+      /*try {
+        p.waitFor(); // uncomment this to pause and wait for program to finish
+      }
+      catch(InterruptedException e) {
+      }*/
     }
     catch (IOException e) {
       System.err.println("IOException");
