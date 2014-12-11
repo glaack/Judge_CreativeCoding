@@ -5,8 +5,6 @@ int whichframe = 0;
 PFont f1; // this is the data structure for a font in processing
 
 String[] alicelines;
-
-String script = "alice in wonderland";
 float[] chary; // this is the y positions of all the characters
 
 int voiceIndex;
@@ -14,18 +12,17 @@ int voiceSpeed;
 
 void setup()
 {
-  size(1000, 800);
+  size(1000, 180);
   
   
     // set the voice based on mouse y
   voiceIndex = round(map(mouseY, 0, height, 0, TextToSpeech.voices.length - 1));
 
-  //set the vooice speed based on mouse X
-  voiceSpeed = 300;
+  voiceSpeed = 250;
   
 
   // type stuff
-  f1 = loadFont("KannadaMN-Bold-255.vlw"); // this loads the font
+  f1 = loadFont("AvenirNext-Bold-100.vlw");
   textFont(f1); // this tells processing which font to use
   textAlign(LEFT); // draw from left
 
@@ -33,9 +30,8 @@ void setup()
   println(alicelines.length);
 
   whichline = 0;
-//  whichline = picknewline();
 
-  while (alicelines[whichline].length ()<1)
+  while (alicelines[whichline].length()<1)
   {
     whichline = picknextline();
   }
@@ -49,9 +45,9 @@ void setup()
 
 void draw()
 {
-  background(0);
-  fill(255);
-  stroke(255);
+  background(255);
+  fill(0);
+  stroke(0);
 
 
   float y = height/2;
@@ -77,13 +73,12 @@ void draw()
     textSize(charsize[i]*thescale);
     text(alicelines[whichline].charAt(i), x, chary[i]);
     x+= textWidth(alicelines[whichline].charAt(i));
-    //chary[i]+=random(0, 0);
   }
 
 
 
   whichframe++;
-  if (whichframe > 60)
+  if (whichframe > 230)
   {
     //whichline = picknewline();
     whichline = (whichline+1)%alicelines.length;
@@ -108,19 +103,14 @@ int picknextline()
    return((whichline+1)%alicelines.length); 
 }
 
-int picknewline()
-{
-  return(int(random(0, alicelines.length)));
-}
-
 void keyReleased()
 {
+    TextToSpeech.say(alicelines[whichline], TextToSpeech.voices[voiceIndex], voiceSpeed);
+    
+    
+    
 }
 
-void mouseReleased()
-{
-    TextToSpeech.say(alicelines[whichline], TextToSpeech.voices[voiceIndex], voiceSpeed);
-}
 
 
 
@@ -193,3 +183,11 @@ static class TextToSpeech extends Object {
     say(script, ALEX, 100);
   }
 }
+
+
+
+//Still need:
+//Draw text on keyPressed
+//Match speeds
+//Align text
+//
