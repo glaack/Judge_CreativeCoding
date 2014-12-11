@@ -5,20 +5,17 @@ int whichframe = 0;
 PFont f1; // this is the data structure for a font in processing
 
 String[] alicelines;
-float[] chary; // this is the y positions of all the characters
 
 int voiceIndex;
 int voiceSpeed;
 
 void setup()
 {
-  size(1000, 180);
+  size(1000, 200);
   
   
-    // set the voice based on mouse y
-  voiceIndex = round(map(mouseY, 0, height, 0, TextToSpeech.voices.length - 1));
 
-  voiceSpeed = 250;
+  voiceSpeed = 350;
   
 
   // type stuff
@@ -31,15 +28,10 @@ void setup()
 
   whichline = 0;
 
-  while (alicelines[whichline].length()<1)
-  {
-    whichline = picknextline();
-  }
-      chary = new float[alicelines[whichline].length ()];
-    for (int i = 0; i<chary.length; i++)
-    {
-      chary[i] = 1;
-    }
+//  while (alicelines[whichline].length()<1)
+//  {
+//    whichline = picknextline();
+//  }
 }
 
 
@@ -58,7 +50,7 @@ void draw()
   float[] charsize = new float[alicelines[whichline].length()];
 
   float x = 0;
-  for (int i = 0; i<alicelines[whichline].length (); i++)
+  for (int i = 0; i<alicelines[whichline].length(); i++)
   {
     float n = map(0.0, 1.0, 9., 10., 48.);
     textSize(n);
@@ -71,31 +63,21 @@ void draw()
   for (int i = 0; i<alicelines[whichline].length (); i++)
   {
     textSize(charsize[i]*thescale);
-    text(alicelines[whichline].charAt(i), x, chary[i]);
+    text(alicelines[whichline].charAt(i), x, height/2 + textAscent()/2);
     x+= textWidth(alicelines[whichline].charAt(i));
   }
 
 
 
   whichframe++;
-  if (whichframe > 230)
+  if (whichframe > 200)
   {
-    //whichline = picknewline();
-    whichline = (whichline+1)%alicelines.length;
-
-    while (alicelines[whichline].length ()<1)
-    {
-      whichline = picknextline();
-    }
-
-    chary = new float[alicelines[whichline].length ()];
-    for (int i = 0; i<chary.length; i++)
-    {
-      chary[i] = 90;
-    }
 
     whichframe = 0;
   }
+  
+  
+
 }
 
 int picknextline()
@@ -105,7 +87,10 @@ int picknextline()
 
 void keyReleased()
 {
-    TextToSpeech.say(alicelines[whichline], TextToSpeech.voices[voiceIndex], voiceSpeed);
+      // set the voice based on mouse y
+  //voiceIndex = round(map(mouseY, 0, height, 0, TextToSpeech.voices.length - 1));
+  whichline = picknextline();
+  TextToSpeech.say(alicelines[whichline], TextToSpeech.voices[voiceIndex], voiceSpeed);
     
     
     
