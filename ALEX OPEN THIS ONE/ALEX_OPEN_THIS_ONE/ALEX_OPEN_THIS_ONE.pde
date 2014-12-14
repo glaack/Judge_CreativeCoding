@@ -11,7 +11,7 @@ int voiceSpeed;
 
 void setup()
 {
-  size(1000, 200);
+  size(1000, 500);
   
   
 
@@ -23,7 +23,7 @@ void setup()
   textFont(f1); // this tells processing which font to use
   textAlign(LEFT); // draw from left
 
-  alicelines = loadStrings("aliceinwonderland.txt");
+  alicelines = loadStrings("inferno.txt");
   println(alicelines.length);
 
   whichline = 0;
