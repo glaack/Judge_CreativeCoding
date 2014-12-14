@@ -168,11 +168,3 @@ static class TextToSpeech extends Object {
     say(script, ALEX, 100);
   }
 }
-
-
-
-//Still need:
-//Draw text on keyPressed
-//Match speeds
-//Align text
-//
