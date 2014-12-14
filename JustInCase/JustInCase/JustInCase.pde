@@ -16,7 +16,7 @@ void setup()
   voiceSpeed = 350;
   
   // type stuff
-  f1 = loadFont("Tahoma-150.vlw");
+  f1 = loadFont("AvenirNext-Bold-100.vlw");
   textFont(f1); // this tells processing which font to use
   textAlign(LEFT); // draw from left
 
@@ -47,8 +47,8 @@ void draw()
     charsize[i] = n;
     x+= textWidth(danteLines[whichline].charAt(i));
   }
-  float thescale = (width/x)*(0.88);
-  x = 50;
+  float thescale = width/x;
+  x = 0;
   for (int i = 0; i<danteLines[whichline].length (); i++)
   {
     textSize(charsize[i]*thescale);
